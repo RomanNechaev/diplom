@@ -4,6 +4,7 @@ import subprocess
 import logging.config
 from settings import LOGGING_CONFIG
 import numpy as np
+import statistics
 logging.config.dictConfig(LOGGING_CONFIG)
 log = logging.getLogger("my_logger")
 
@@ -25,10 +26,8 @@ class Utils:
 
     @staticmethod
     def extract_archive(input_file, directory):
-        zip_f = zipfile.ZipFile(input_file)
-        model_file = input_file.split("/")[-1].split(".")[0]
-        zip_f.extract(f"{model_file}.txt", directory)
-        zip_f.close()
+        with zipfile.ZipFile(input_file,'r') as zip_f:
+            zip_f.extractall(directory)
 
     @staticmethod
     def calculate_removed_rows_percentage(input_file, output_file):
@@ -46,4 +45,4 @@ class Utils:
 
     @staticmethod
     def get_median_metric(metrics):
-        return np.median(np.array(metrics))
+        return statistics.median(metrics)

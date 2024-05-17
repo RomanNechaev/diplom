@@ -10,12 +10,14 @@ import numpy as np
 class Metrics:
     @staticmethod
     def mse(image_a, image_b):
+        print(image_a)
+        print(image_b)
         image_a = cv2.imread(image_a)
         image_b = cv2.imread(image_b)
         err = np.sum((image_a.astype("float") - image_b.astype("float")) ** 2)
         err /= float(image_a.shape[0] * image_a.shape[1])
 
-        return err
+        return float(err)
 
     @staticmethod
     def ssim(image_a, image_b):
@@ -29,4 +31,4 @@ class Metrics:
         first = lpips.im2tensor(lpips.load_image(image_a))
         second = lpips.im2tensor(lpips.load_image(image_b))
         lpips_metric = loss_fn.forward(first, second)
-        return lpips_metric
+        return lpips_metric.item()
