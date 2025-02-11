@@ -1,0 +1,14 @@
+name: exp
+dependencies:
+  - python=3.10
+  - opencv
+  - numpy
+  - pandas
+  - pyyaml
+  - pip
+  - pip:
+    - SSIM-PIL
+    - PIL
+    - lpips
+    - cv2
+    - torchvision
